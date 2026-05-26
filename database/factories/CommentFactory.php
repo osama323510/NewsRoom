@@ -1,0 +1,32 @@
+<?php
+
+namespace Database\Factories;
+
+use App\Models\Article;
+use App\Models\Comment;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+/**
+ * @extends Factory<Comment>
+ */
+class CommentFactory extends Factory
+{
+    /**
+     * Define the model's default state.
+     *
+     * @return array<string, mixed>
+     */
+    public function definition(): array
+    {
+        $article = Article::inRandomOrder()->first();
+        return [
+            'user_id'          => User::inRandomOrder()->first()->id,
+            'comment'          => $this->faker->sentence(10),
+            'commentable_id'   => $article->id,
+            'commentable_type' => Article::class, 
+            'created_at'       => now(),
+            'updated_at'       => now(),
+        ];
+    }
+}
