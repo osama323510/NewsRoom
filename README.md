@@ -82,20 +82,4 @@ Profile & Tag ➡️ Profile stores granular user meta-data bound to a parent ac
 
 ### K. Dynamic Content Read-Time Estimation via Eloquent Accessors
 * **What was done:** Implemented an on-the-fly computational logic using Laravel's Eloquent Accessors (`reading_time`) to dynamically measure the estimated reading time of an article before generating the API payload.
-* **Why:** This avoids **Database Redundancy & Schema Bloat**. Storing a static `reading_time` column in the `articles` table introduces maintenance overhead and risks data desynchronization during updates. By computing the value at the application layer based on average human reading speeds ($\approx 200$ WPM) applied to the dynamic `content` length, the system guarantees architectural purity, real-time accuracy, and zero database weight.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
+  
