@@ -1,7 +1,7 @@
 Markdown
 # 📰 NewsRoom API backend
 
-Welcome to the core backend system for the **Sports Club Management System (NewsRoom)**. This platform is a robust, enterprise-grade RESTful API built with **Laravel**, designed to handle sports articles, user roles, automated reporting, and background maintenance.
+
 
 ---
 
