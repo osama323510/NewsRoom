@@ -29,22 +29,21 @@ TO RUN THE PROJECT
 🏗️ 3. Architectural Decisions & Rationales
 
 ### D. Repository Pattern & Interface-Driven Design
-* **What was done:** Extracted all direct database querying from the controllers and services by introducing an abstraction layer using explicit PHP Interfaces:
+Interfaces:
   1. `ArticleRepositoryInterface` ➡️ Declares the architectural contract for CRUD and archiving actions on the `Article` model.
   2. `UserRepositoryInterface` ➡️ Handles user-specific queries, role checks, and database aggregation for reporting.
   3. `NotificationDispatcherInterface` ➡️ Abstracts out the mailing/notification subsystem (e.g., system alerts, reports, or registration greetings).
-* **Why:** This strictly follows the **Dependency Inversion Principle (SOLID)**. The core business logic no longer depends on Eloquent directly; it depends on abstract contracts. If we ever decide to swap Eloquent for Doctrine, MongoDB, or an external API, we only need to write a new implementation class without touching our Services or Controller workflows.
+
 
 
 ArticleRepository ➡️ Implements ArticleRepositoryInterface to handle Fluent/Eloquent database interactions for content and archiving.
 
 UserRepository ➡️ Implements UserRepositoryInterface to encapsulate user roles, profiles, and data aggregation logic.
 
-ArticlePublishedDbNotification ➡️ Implements NotificationDispatcherInterface to process and store transactional notifications inside the local database.
+ArticlePublishedDbNotification ➡️ Implements NotificationDispatcherInterface to process and store  notifications .
 
 ArticlePublishedMailNotification ➡️ Implements NotificationDispatcherInterface to manage email delivery payloads and queue dispatching for published content.
 
-Why: This strictly follows the Interface Segregation and Dependency Inversion Principles (SOLID). By separating the contracts from their concrete runtime executions, the application logic remains decoupled. We can easily swap out email providers, move from database alerts to push notifications, or change the underlying data fetching mechanisms without altering the core business workflows.
 
 ### CONTROLLER 
 
@@ -70,7 +69,6 @@ articles:report (Artisan Command) ➡️ Generates a comprehensive analytical lo
 
 
 📊 2. Entities and Relationships (ERD Concepts)
-The database schema is optimized to enforce data integrity and clear domain boundaries. Below are the primary entities and how they interact:
 
 
 User ➡️ Serves as the central entity, establishing a One-to-One relationship with Profile (hasOne), and structured One-to-Many relationships with both Article and standard Comment collections (hasMany).
